@@ -1,16 +1,17 @@
-## Hi there 👋
+# Assaad Lutf Albarty — Product Manager
 
-<!--
-**AssaadAlbarty/AssaadAlbarty** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Personal portfolio site for Assaad Lutf Albarty, a Product Manager with 14+ years across product, operations, service delivery, and engineering — including 4+ years in formally titled Product Manager roles across FinTech, EdTech, and LegalTech.
 
-Here are some ideas to get you started:
+## 🌐 Live Site
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+**[assaadalbarty.github.io](https://assaadalbarty.github.io/)**
+
+## What's inside
+
+- **Experience:** PM roles at Wajjad (LegalTech), Cashi (FinTech), Naseej (EdTech), and earlier operations/infrastructure delivery.
+- **Focus:** B2B SaaS, FinTech, multi-tenant workflows, onboarding systems, Arabic/RTL UX, and AI-augmented product discovery.
+- **Current projects:** Bawsala (AI productivity Chrome extension) and Health Circle (early-stage health financing concept).
+
+---
+
+*Built with HTML & CSS, hosted on GitHub Pages.*
