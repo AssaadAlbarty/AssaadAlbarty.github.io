@@ -408,6 +408,10 @@
                 </div>
               </div>
               <input type="range" id="input-churn" min="0.5" max="25" step="0.5" value="5.0" class="w-full h-1.5 bg-slate-200 rounded-lg cursor-pointer">
+              <div class="flex justify-between items-center text-[10px] text-slate-500 pt-0.5">
+                <span>Avg Lifespan: <strong id="churn-lifespan-hint" class="font-mono text-indigo-600">20.0 mo</strong></span>
+                <span>Lost: <strong id="churn-lost-hint" class="font-mono text-rose-600">125 / mo</strong> (<span id="churn-mrr-hint" class="font-mono">-$6,125</span>)</span>
+              </div>
             </div>
           </div>
 
@@ -656,6 +660,25 @@
                 </div>
               </div>
             </div>
+
+            <!-- Lifetime Unit Economics & Retention Pillar -->
+            <div class="grid grid-cols-3 gap-2.5 pt-3 border-t border-slate-100 text-center text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+                <span class="block text-[10px] uppercase font-bold text-slate-500">Customer Lifetime (LTV)</span>
+                <span id="unit-ltv-val" class="font-extrabold font-mono text-indigo-700 text-sm">$757</span>
+                <span class="block text-[10px] text-slate-400 mt-0.5">Contribution &times; Lifespan</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+                <span class="block text-[10px] uppercase font-bold text-slate-500">Avg Customer Lifespan</span>
+                <span id="unit-lifespan-val" class="font-extrabold font-mono text-slate-900 text-sm">20.0 mo</span>
+                <span class="block text-[10px] text-slate-400 mt-0.5">1 / Churn Rate</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70">
+                <span class="block text-[10px] uppercase font-bold text-slate-500">Churned MRR at Risk</span>
+                <span id="unit-churn-mrr-val" class="font-extrabold font-mono text-rose-600 text-sm">-$6,125</span>
+                <span id="unit-churn-accounts-val" class="block text-[10px] text-rose-500 mt-0.5">125 accounts / mo</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -688,7 +711,7 @@
                   <td class="py-2.5 px-3 text-emerald-700 font-medium">Topline</td>
                   <td id="tbl-revenue" class="py-2.5 px-3 text-right font-mono">$122,500</td>
                   <td class="py-2.5 px-3 text-right font-mono">100.0%</td>
-                  <td class="py-2.5 px-3 text-slate-500 text-[11px]">Pricing strategy &times; Total volume of active subscribers/clients.</td>
+                  <td id="tbl-revenue-note" class="py-2.5 px-3 text-slate-500 text-[11px]">Pricing strategy &times; Total active volume.</td>
                 </tr>
 
                 <!-- COGS Breakdown -->
@@ -1275,6 +1298,52 @@
       </div>
     </section>
 
+    <!-- EDUCATIONAL DISCLAIMER, ASSUMPTIONS & LIMITATIONS -->
+    <section class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-slate-200 text-slate-500 text-[11px] leading-relaxed no-print space-y-4">
+      <div class="flex items-center gap-2 text-slate-700 font-bold text-xs uppercase tracking-wider">
+        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>Model Methodology, Assumptions &amp; Educational Disclaimer</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
+        <!-- Col 1: Educational Disclaimer -->
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-700 text-xs">Educational Disclaimer</h4>
+          <p>
+            This interactive simulator is strictly an educational heuristic framework designed for product leaders, technology founders, and consultants to conceptualize software unit economics, AI token inference workloads, and strategic P&amp;L sensitivity.
+          </p>
+          <p class="text-slate-400">
+            This tool does not constitute certified CPA, CFO, statutory audit, investment, or legal tax advice. Users should consult a certified financial planner or corporate accountant for binding corporate budgets, capitalization audits, or tax filings.
+          </p>
+        </div>
+
+        <!-- Col 2: Core Financial Assumptions -->
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-700 text-xs">Core Financial Assumptions</h4>
+          <ul class="list-disc list-inside space-y-1 text-slate-600">
+            <li><strong>Single-Month P&amp;L Snapshot:</strong> Revenue and expenses are recognized on a current-period basis without multi-period deferred revenue amortization.</li>
+            <li><strong>Straight-Line CAPEX Depreciation:</strong> Capitalized investments are amortized linearly over the specified term with zero salvage value.</li>
+            <li><strong>Linear Variable COGS:</strong> Token inference, compute, and gateway fees scale directly with active users without tiered volume discounts.</li>
+            <li><strong>Flat 15% Corporate Tax:</strong> Applied exclusively when operating income (EBIT) is positive; zero tax credits on losses.</li>
+            <li><strong>Baseline Acquisition Rate:</strong> Models a ~7.5% monthly new user inflow relative to current account scale.</li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Model Boundaries & Dynamics -->
+        <div class="space-y-1.5">
+          <h4 class="font-bold text-slate-700 text-xs">Model Boundaries &amp; Churn Dynamics</h4>
+          <ul class="list-disc list-inside space-y-1 text-slate-600">
+            <li><strong>Why Churn is not a P&amp;L Expense:</strong> Under GAAP/IFRS, churn is a cohort retention metric, not a cash outflow. It does not deduct from single-month EBITDA, but directly governs Customer Lifetime (LTV), LTV:CAC, and 36-month J-Curve cash compounding.</li>
+            <li><strong>Working Capital Timing Omitted:</strong> Excludes Days Sales Outstanding (DSO), Net-30/60 enterprise invoice payment lags, and accounts payable float.</li>
+            <li><strong>Capital Cost Simplification:</strong> Excludes Weighted Average Cost of Capital (WACC), hurdle rates, and discounted cash flow (NPV) factors.</li>
+            <li><strong>Capacity Step-Functions:</strong> Fixed OPEX assumes smooth scaling rather than discrete hiring hurdles or data center reserve commitments.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="bg-white border-t border-slate-200 py-8 mt-12 text-center text-xs text-slate-500 no-print">
@@ -1418,12 +1487,20 @@
       const fixedMonthlyOverhead = totalOPEX + monthlyDepreciation;
       const breakevenUsers = unitContributionMargin > 0 ? Math.ceil(fixedMonthlyOverhead / unitContributionMargin) : 0;
 
-      // CAC and LTV
-      const churnUsers = state.subscribers * (state.churn / 100);
-      const estimatedNewUsers = Math.max(churnUsers + (state.subscribers > 50 ? 20 : 2), 1);
-      const cac = state.marketing / estimatedNewUsers;
-      const userLifespanMonths = state.churn > 0 ? 1 / (state.churn / 100) : 1;
-      const ltv = (unitContributionMargin * userLifespanMonths);
+      // CAC and LTV Dynamics
+      const monthlyChurnRate = Math.max(state.churn / 100, 0.002); // Guard against divide-by-zero
+      const userLifespanMonths = 1 / monthlyChurnRate;
+
+      // Churn Volume & Revenue at Risk
+      const churnedUnits = Math.round(state.subscribers * (state.churn / 100));
+      const churnedMRR = churnedUnits * state.price;
+
+      // Acquisition baseline (~7.5% monthly new customer adds relative to scale)
+      const monthlyNewAcquisitions = Math.max(1, Math.round(state.subscribers * 0.075));
+      const cac = state.marketing > 0 ? (state.marketing / monthlyNewAcquisitions) : 0;
+
+      // LTV = Contribution Margin * Average Lifetime in Months
+      const ltv = unitContributionMargin * userLifespanMonths;
       const ltvCacRatio = cac > 0 ? (ltv / cac) : 0;
       const cacPaybackMonths = unitContributionMargin > 0 ? (cac / unitContributionMargin) : 0;
 
@@ -1446,6 +1523,9 @@
         breakevenUsers,
         cac,
         ltv,
+        userLifespanMonths,
+        churnedUnits,
+        churnedMRR,
         ltvCacRatio,
         cacPaybackMonths
       };
@@ -1506,14 +1586,26 @@
 
       const ltvCacEl = document.getElementById('metric-ltv-cac');
       ltvCacEl.textContent = `${f.ltvCacRatio.toFixed(1)}x`;
+
       const ltvCacSub = document.getElementById('metric-ltv-cac-sub');
+      const lifespanStr = `${f.userLifespanMonths.toFixed(0)} mo lifespan`;
+      const ltvStr = fmtUSD(f.ltv, 0);
+
       if (f.ltvCacRatio >= 3.0) {
-        ltvCacSub.textContent = `Payback: ${f.cacPaybackMonths.toFixed(1)} mo (Great)`;
+        ltvCacSub.innerHTML = `LTV: <span class="font-bold text-slate-700">${ltvStr}</span> • ${lifespanStr}`;
         ltvCacSub.className = 'text-[11px] text-emerald-600 mt-0.5 font-medium';
       } else {
-        ltvCacSub.textContent = `Payback: ${f.cacPaybackMonths.toFixed(1)} mo (Risky)`;
+        ltvCacSub.innerHTML = `LTV: <span class="font-bold text-rose-600">${ltvStr}</span> • Payback: ${f.cacPaybackMonths.toFixed(1)} mo`;
         ltvCacSub.className = 'text-[11px] text-amber-600 mt-0.5 font-medium';
       }
+
+      // Live Churn Control Slider Hint
+      const churnLifespanHint = document.getElementById('churn-lifespan-hint');
+      if (churnLifespanHint) churnLifespanHint.textContent = `${f.userLifespanMonths.toFixed(1)} mo`;
+      const churnLostHint = document.getElementById('churn-lost-hint');
+      if (churnLostHint) churnLostHint.textContent = `${f.churnedUnits.toLocaleString()} / mo`;
+      const churnMrrHint = document.getElementById('churn-mrr-hint');
+      if (churnMrrHint) churnMrrHint.textContent = `-${fmtUSD(f.churnedMRR)}`;
 
       // Waterfall Tab Stats
       document.getElementById('waterfall-gm-stat').textContent = `${f.grossMarginPct.toFixed(1)}%`;
@@ -1540,9 +1632,23 @@
         ? 'font-extrabold font-mono text-emerald-700' 
         : 'font-extrabold font-mono text-rose-600';
 
+      // Unit Economics Lifetime Metrics
+      const unitLtvVal = document.getElementById('unit-ltv-val');
+      if (unitLtvVal) unitLtvVal.textContent = fmtUSD(f.ltv, 0);
+      const unitLifespanVal = document.getElementById('unit-lifespan-val');
+      if (unitLifespanVal) unitLifespanVal.textContent = `${f.userLifespanMonths.toFixed(1)} mo`;
+      const unitChurnMrrVal = document.getElementById('unit-churn-mrr-val');
+      if (unitChurnMrrVal) unitChurnMrrVal.textContent = `-${fmtUSD(f.churnedMRR)}`;
+      const unitChurnAccountsVal = document.getElementById('unit-churn-accounts-val');
+      if (unitChurnAccountsVal) unitChurnAccountsVal.textContent = `${f.churnedUnits.toLocaleString()} accounts / mo`;
+
       // Update P&L Table Rows
       const rev = f.revenue || 1;
       document.getElementById('tbl-revenue').textContent = fmtUSD(f.revenue);
+      const tblRevNote = document.getElementById('tbl-revenue-note');
+      if (tblRevNote) {
+        tblRevNote.innerHTML = `Pricing strategy &times; Total active volume &bull; <span class="text-rose-600 font-medium">${f.churnedUnits.toLocaleString()} churned/mo (-${fmtUSD(f.churnedMRR)} MRR)</span>`;
+      }
       document.getElementById('tbl-cogs-tokens').textContent = `-${fmtUSD(f.tokensTotal)}`;
       document.getElementById('tbl-cogs-tokens-pct').textContent = `${((f.tokensTotal / rev) * 100).toFixed(1)}%`;
       document.getElementById('tbl-cogs-infra').textContent = `-${fmtUSD(f.infraTotal)}`;
@@ -1745,7 +1851,7 @@
       waterfallChart.data.datasets[0].backgroundColor[5] = f.netProfit >= 0 ? '#10b981' : '#f43f5e';
       waterfallChart.update('none');
 
-      // Update 36-Month J-Curve Model
+      // Update 36-Month J-Curve Model (Dynamic Retention Cohort)
       const cumulativeCash = [];
       const monthlyRevArr = [];
       const monthlyCostArr = [];
@@ -1753,13 +1859,19 @@
       let runningCash = -state.capexUpfront;
       let breakEvenMonthFound = null;
 
+      const monthlyChurnRate = Math.max(state.churn / 100, 0.002);
+      let currentSubs = Math.max(1, Math.round(state.subscribers * 0.2)); // Starting base
+
       for (let m = 1; m <= 36; m++) {
-        const rampFactor = Math.min(1.0, Math.pow(m / 24, 1.35));
-        const currentSubs = Math.max(1, Math.round(state.subscribers * rampFactor * (m <= 6 ? 0.25 + (m * 0.1) : 1)));
-        
+        const expansionFactor = Math.min(2.0, 0.5 + (m / 18));
+        const newAdds = Math.max(1, Math.round((state.subscribers * 0.075) * expansionFactor));
+        const churnedSubs = Math.round(currentSubs * monthlyChurnRate);
+
+        currentSubs = Math.max(1, currentSubs - churnedSubs + newAdds);
+
         const mRev = currentSubs * state.price;
         const mCOGS = (currentSubs * (state.tokenCost + state.infraCost)) + (mRev * (state.gatewayFeePct / 100));
-        const mOPEX = (state.salaries + state.marketing + state.ga) * (0.6 + (0.4 * (m / 36)));
+        const mOPEX = (state.salaries + state.marketing + state.ga) * (0.65 + (0.35 * (m / 36)));
         const mDeprec = state.depreciationMonths >= m ? (state.capexUpfront / state.depreciationMonths) : 0;
         const mCost = mCOGS + mOPEX + mDeprec;
         const mNet = mRev - mCost;
